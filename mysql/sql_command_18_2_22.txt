@@ -1,0 +1,258 @@
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 44
+Server version: 8.0.28 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2022, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> select * from officers;
+ERROR 1046 (3D000): No database selected
+mysql> select *from officers;
+ERROR 1046 (3D000): No database selected
+mysql> use koushik;
+Database changed
+mysql> select *from officers;
++----+----------+---------+
+| id | name     | address |
++----+----------+---------+
+|  1 | koushik  | dankuni |
+|  2 | anirudha | kolkata |
+|  3 | coco     | behala  |
+|  4 | nikita   | mumbai  |
++----+----------+---------+
+4 rows in set (0.00 sec)
+
+mysql> select *from student2;
++----+----------+-------------+
+| id | name     | cource_name |
++----+----------+-------------+
+|  1 | ananiyal | ee          |
+|  2 | ashok    | etc         |
+|  3 | utkarsha | cs          |
+|  4 | faisal   | me          |
++----+----------+-------------+
+4 rows in set (0.00 sec)
+
+mysql> select officers.name,officers.address,student2.name from officers INNER JOIN student2 ON officers.id=student2.id
+    -> exit;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'exit' at line 2
+mysql> select officers.name,officers.address,student2.name from officers INNER JOIN student2 ON officers.id=student2.id
+    -> exit;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'exit' at line 2
+mysql> select officers.name,officers.address,student2.name from officers INNER JOIN student2 ON officers.id=student2.id;
++----------+---------+----------+
+| name     | address | name     |
++----------+---------+----------+
+| koushik  | dankuni | ananiyal |
+| anirudha | kolkata | ashok    |
+| coco     | behala  | utkarsha |
+| nikita   | mumbai  | faisal   |
++----------+---------+----------+
+4 rows in set (0.00 sec)
+
+mysql> select officers.name,officers.address,student2.cource_name from officers LEFT JOIN student2 ON officers.id=student2.id;
++----------+---------+-------------+
+| name     | address | cource_name |
++----------+---------+-------------+
+| koushik  | dankuni | ee          |
+| anirudha | kolkata | etc         |
+| coco     | behala  | cs          |
+| nikita   | mumbai  | me          |
++----------+---------+-------------+
+4 rows in set (0.00 sec)
+
+mysql> select officers.name,officers.address,student2.cource_name,student2.name from officers RTGHT JOIN student2 ON officers.id=student2.id;
+ERROR 1054 (42S22): Unknown column 'officers.name' in 'field list'
+mysql> select officers.name,officers.address,student2.cource_name,student2.name from officers RTGHT JOIN student2 ON officers.id=student2.id;
+ERROR 1054 (42S22): Unknown column 'officers.name' in 'field list'
+mysql> select officers.name,officers.address,student2.cource_name,student2.name from officers RIGHT JOIN student2 ON officers.id=student2.id;
++----------+---------+-------------+----------+
+| name     | address | cource_name | name     |
++----------+---------+-------------+----------+
+| koushik  | dankuni | ee          | ananiyal |
+| anirudha | kolkata | etc         | ashok    |
+| coco     | behala  | cs          | utkarsha |
+| nikita   | mumbai  | me          | faisal   |
++----------+---------+-------------+----------+
+4 rows in set (0.00 sec)
+
+mysql> select officers.name,officers.address,student2.cource_name,student2.name from officers CROSS JOIN student2 ON officers.id=student2.id;
++----------+---------+-------------+----------+
+| name     | address | cource_name | name     |
++----------+---------+-------------+----------+
+| koushik  | dankuni | ee          | ananiyal |
+| anirudha | kolkata | etc         | ashok    |
+| coco     | behala  | cs          | utkarsha |
+| nikita   | mumbai  | me          | faisal   |
++----------+---------+-------------+----------+
+4 rows in set (0.00 sec)
+
+mysql> select officers.name,officers.address,student2.cource_name,student2.name from officers CROSS JOIN student2 ;
++----------+---------+-------------+----------+
+| name     | address | cource_name | name     |
++----------+---------+-------------+----------+
+| nikita   | mumbai  | ee          | ananiyal |
+| coco     | behala  | ee          | ananiyal |
+| anirudha | kolkata | ee          | ananiyal |
+| koushik  | dankuni | ee          | ananiyal |
+| nikita   | mumbai  | etc         | ashok    |
+| coco     | behala  | etc         | ashok    |
+| anirudha | kolkata | etc         | ashok    |
+| koushik  | dankuni | etc         | ashok    |
+| nikita   | mumbai  | cs          | utkarsha |
+| coco     | behala  | cs          | utkarsha |
+| anirudha | kolkata | cs          | utkarsha |
+| koushik  | dankuni | cs          | utkarsha |
+| nikita   | mumbai  | me          | faisal   |
+| coco     | behala  | me          | faisal   |
+| anirudha | kolkata | me          | faisal   |
+| koushik  | dankuni | me          | faisal   |
++----------+---------+-------------+----------+
+16 rows in set (0.00 sec)
+
+mysql> select address,COUNT (*)from officers group by address;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '*)from officers group by address' at line 1
+mysql> select address,COUNT(*)from officers group by address;
++---------+----------+
+| address | COUNT(*) |
++---------+----------+
+| dankuni |        1 |
+| kolkata |        1 |
+| behala  |        1 |
+| mumbai  |        1 |
++---------+----------+
+4 rows in set (0.00 sec)
+
+mysql> alter table officers add working_hours int(10) not null;
+Query OK, 0 rows affected, 1 warning (0.06 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+mysql> select * from officers;
++----+----------+---------+---------------+
+| id | name     | address | working_hours |
++----+----------+---------+---------------+
+|  1 | koushik  | dankuni |             0 |
+|  2 | anirudha | kolkata |             0 |
+|  3 | coco     | behala  |             0 |
+|  4 | nikita   | mumbai  |             0 |
++----+----------+---------+---------------+
+4 rows in set (0.00 sec)
+
+mysql> update officers set working_hours=8 where i=1;
+ERROR 1054 (42S22): Unknown column 'i' in 'where clause'
+mysql> update officers set working_hours=8 where id=1;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from officers;
++----+----------+---------+---------------+
+| id | name     | address | working_hours |
++----+----------+---------+---------------+
+|  1 | koushik  | dankuni |             8 |
+|  2 | anirudha | kolkata |             0 |
+|  3 | coco     | behala  |             0 |
+|  4 | nikita   | mumbai  |             0 |
++----+----------+---------+---------------+
+4 rows in set (0.00 sec)
+
+mysql> update officers set working_hours=12 where i=2;
+ERROR 1054 (42S22): Unknown column 'i' in 'where clause'
+mysql> update officers set working_hours=12 where id=2;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update officers set working_hours=18 where id=3;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from officers;
++----+----------+---------+---------------+
+| id | name     | address | working_hours |
++----+----------+---------+---------------+
+|  1 | koushik  | dankuni |             8 |
+|  2 | anirudha | kolkata |            12 |
+|  3 | coco     | behala  |            18 |
+|  4 | nikita   | mumbai  |             0 |
++----+----------+---------+---------------+
+4 rows in set (0.00 sec)
+
+mysql> select name,sum(working_hours) as "total working" from officers;
++---------+---------------+
+| name    | total working |
++---------+---------------+
+| koushik |            38 |
++---------+---------------+
+1 row in set (0.00 sec)
+
+mysql> select * from officers;
++----+----------+---------+---------------+
+| id | name     | address | working_hours |
++----+----------+---------+---------------+
+|  1 | koushik  | dankuni |             8 |
+|  2 | anirudha | kolkata |            12 |
+|  3 | coco     | behala  |            18 |
+|  4 | nikita   | mumbai  |             0 |
++----+----------+---------+---------------+
+4 rows in set (0.00 sec)
+
+mysql> select name,sum(working_hours) as "total working" from officers;
++---------+---------------+
+| name    | total working |
++---------+---------------+
+| koushik |            38 |
++---------+---------------+
+1 row in set (0.00 sec)
+
+mysql> select name,sum(working_hours) as "total working" from officers group by name;
++----------+---------------+
+| name     | total working |
++----------+---------------+
+| koushik  |             8 |
+| anirudha |            12 |
+| coco     |            18 |
+| nikita   |             0 |
++----------+---------------+
+4 rows in set (0.00 sec)
+
+mysql> select name,max(working_hours) as "total working" from officers group by name;
++----------+---------------+
+| name     | total working |
++----------+---------------+
+| koushik  |             8 |
+| anirudha |            12 |
+| coco     |            18 |
+| nikita   |             0 |
++----------+---------------+
+4 rows in set (0.00 sec)
+
+mysql> select name,mini(working_hours) as "total working" from officers group by name;
+ERROR 1305 (42000): FUNCTION koushik.mini does not exist
+mysql> select name,min(working_hours) as "total working" from officers group by name;
++----------+---------------+
+| name     | total working |
++----------+---------------+
+| koushik  |             8 |
+| anirudha |            12 |
+| coco     |            18 |
+| nikita   |             0 |
++----------+---------------+
+4 rows in set (0.00 sec)
+
+mysql> select name,avg(working_hours) as "total working" from officers group by name;
++----------+---------------+
+| name     | total working |
++----------+---------------+
+| koushik  |        8.0000 |
+| anirudha |       12.0000 |
+| coco     |       18.0000 |
+| nikita   |        0.0000 |
++----------+---------------+
+4 rows in set (0.00 sec)
+
+mysql>
