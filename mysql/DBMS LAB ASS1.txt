@@ -1,0 +1,61 @@
+1. Create the following table CUSTOMER.
+Ans: use core;
+
+CREATE TABLE CUSTOMER (
+	Cust_id Varchar (5) NOT NULL PRIMARY KEY ,
+	Fname Varchar(15),
+	Lname Varchar(15),
+	Area Char (2),
+	Phone Varchar (10),
+	DOB  Date,
+    Payment decimal(6,2));
+
+insert into customer values('A01','Ivan','Ross','SA','6125467','1986-01-15',800.50);
+insert into customer values('A02','Vandana','Ray','MU','5560379','1987-12-20',1000.75);
+insert into customer values('A03','Pramada','Jauguste','DA','4560389','1967-06-25',500.00);
+insert into customer values('A04','Basu','Navindi','BA','6125401','1956-02-29',860.00);
+insert into customer values('A05','Ravi','Shridhar','NA','null','1989-02-15',500.50);
+insert into customer values('A06','Rukmini','Aiyer','GH','5125274','1987-06-23',1500.50);
+
+2. Display the structure of the table you have created?
+Ans:  describe customer;
+
+3. Display the data of the created table?
+Ans: SELECT * FROM customer;
+
+4. Insert a row which will accept system date.
+Ans: select sysdate();
+
+5. Display the data in the table.
+Ans: SELECT DOB FROM customer;
+
+6. Update the phone numbers of customer A02 and A04.
+Ans: update customer set phone='123456' where Cust_id='A02';
+update customer set phone='654321' where Cust_id='A04';
+
+7. Update the date of birth of customer A03 and A05.
+Ans:  update customer set DOB='1997-01-24' where Cust_id='A03';
+update customer set DOB='1997-11-23' where Cust_id='A05';
+
+8. Display the updated table.
+Ans:  SELECT * FROM customer;
+
+9. Delete 2 rows from the table for customers A01 and A05.
+Ans:  delete from customer where Cust_id='A01';
+delete from customer where Cust_id='A05';
+
+10. Delete all the rows from the table.
+Ans:  TRUNCATE TABLE customer;
+
+11. Insert 5 records according to your own wish.
+Ans:  insert into customer values('A01','Ivan','Ross','SA','6125467','1986-01-15',800.50);
+insert into customer values('A02','Vandana','Ray','MU','5560379','1987-12-20',1000.75);
+insert into customer values('A03','Pramada','Jauguste','DA','4560389','1967-06-25',500.00);
+insert into customer values('A04','Basu','Navindi','BA','6125401','1956-02-29',860.00);
+insert into customer values('A05','Ravi','Shridhar','NA','null','1989-02-15',500.50);
+
+12. Update one record based on any criteria according to your own wish.
+Ans:  update customer set Fname='koushik' where Cust_id='A01';
+
+13. Delete any 1 record from the table based on particular criteria.
+Ans:  delete from customer  where Cust_id='A05';
