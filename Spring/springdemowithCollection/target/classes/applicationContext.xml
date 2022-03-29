@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+<bean id="a1" class="com.entiyy.question">
+<constructor-arg name="qno" value="001"></constructor-arg>
+<constructor-arg name="qname" value="what is java"></constructor-arg>
+<constructor-arg>
+<list>
+<value>java is programing lan</value>
+<value>it is used for web or windeow application</value>
+<value>it platform independent</value>
+</list>
+</constructor-arg>
+</bean>
+
+</beans>
